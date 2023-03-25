@@ -1,0 +1,11 @@
+let x=[30, 160,20,10]
+let y=[50, 40, 10, 10]
+let playerX = 150
+let playerY = 300
+let speeds= [1,2,1.5, 1.4]
+let FPS = 60
+let TPS = 60
+let obstacleW = 30
+let playerW =50
+let lives = 3
+let playerV = -1

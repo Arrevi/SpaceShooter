@@ -1,5 +1,6 @@
 #screen {
-        border: 1px solid black;
+        background-color: bisque;
+        border: 2px solid black;
         width: 360px;
         height: 400px;
         position: center;
@@ -17,7 +18,13 @@ left: 50px;
 .obstacle {
     width: 30px;
     height: 30px;
-    background-color: aquamarine;
+    background-color: rgb(163, 7, 33);
     border-radius: 5px;
     position: absolute;
+}
+.bullet {
+    width: 10px;
+    height: 15px;
+    background-color: aquamarine;
+
 }
