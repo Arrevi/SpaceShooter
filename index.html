@@ -2,14 +2,46 @@
 <html>
     <head>
         <title>S</title>
-        <style src="style.css"></style>
+        <style>
+            #screen {
+    border: 1px solid black;
+    width: 360px;
+    height: 400px;
+    position: relative;
+    margin-top: 50 px;
+}
+#player {
+width: 30px;
+height: 30px;
+background-color: rgb(1, 0, 77);
+border-radius: 5px;
+position: absolute;
+top: 300px;
+left: 50px;
+}
+.obstacle {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(163, 7, 33);
+    border-radius: 5px;
+    position: absolute;
+
+}
+
+
+        </style>
     </head>
     <body>
-        <div id="screen"></div>
-        <div id="player"></div>
+        <div id="screen">
+            <div id="player"></div>
         <div class="obstacle"></div>
-        <div class="bullet"></div>
+        <div class="obstacle"></div>
+        <div class="obstacle"></div>
+        <div class="obstacle"></div>
         <div id="lives"></div>
+        </div>
+        
+        
 
 <script src="main.js"></script>
     </body>
