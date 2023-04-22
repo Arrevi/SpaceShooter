@@ -89,26 +89,15 @@ window.setInterval(model, 1000/TPS)
 addEventListener("mousedown", (event) => {
     bullets.push(new bullet(playerX, playerY))
 });
+
 addEventListener("keydown", (event) => {
-    switch (event.key) {
-      case "a":
-        playerX -= 10; // move left
-        break;
-      case "d":
-        playerX += 10; // move right
-        break;
-      case "w":
-        playerY -= 10; // move up
-        break;
-      case "s":
-        playerY += 10; // move down
-        break;
+    if (event.key === "a" || event.key === "ArrowLeft") {
+     
+      playerX -= 10;
+    } else if (event.key === "d" || event.key === "ArrowRight") {
+     
+      playerX += 10;
     }
-    updatePlayerPosition(); // update the player's position after each key press
+    updatePlayerPosition();
   });
   
-  function updatePlayerPosition() {
-    // update the player's position in the DOM
-    const playerEl = document.querySelector(".player");
-    playerEl.style.transform = `translate(${playerX}px, ${playerY}px)`;
-  }
