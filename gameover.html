@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>S</title>
+        <style >
+            #screen {
+        background-color: bisque;
+        border: 2px solid black;
+        width: 360px;
+        height: 400px;
+        position: center;
+        margin-top: 50 px; 
+}
+
+#player {
+    background: linear-gradient(180deg, hsl(255,75%,50%) 0%, hsl(196,90%,50%) 100%);
+    background-size: 100vw 100vh;
+  }
+  div {
+    position: fixed;
+    font-size: 130px;
+  }
+
+.obstacle {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(163, 7, 33);
+    border-radius: 5px;
+    position: absolute;
+}
+.bullet {
+    width: 10px;
+    height: 15px;
+    background-color: aquamarine;
+
+}
+canvas {
+    border: 1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+
+        </style>
+    </head>
+    <body>
+        <h> GAME OVER</h>
+        <div id="screen"></div>
+        <div id="player">🚀</div>
+        
+<script src="main.js"></script>
+    </body>
+</html>
