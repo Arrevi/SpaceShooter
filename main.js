@@ -12,6 +12,7 @@ let lives = 3
 let playerV = -1
 let t = 0;
 let bullets = []
+let level = 1
 
 let obstacles = [
     {x: Math.random() * 330 | 0, y: -30, speed: 1},
@@ -26,25 +27,40 @@ const spawnObstacle = (obstacle) => {
     obstacle.x = Math.random() * 330 | 0;
 };
 
-const moveObstacles = () => {
+const model = () => {
+    //обьявление анонимной функции модель
     obstacles.forEach(obstacle => {
-        obstacle.y += obstacle.speed;
+        //анонимная функция для каждого препятствия  
+        obstacle.y = obstacle.y+ obstacle.speed;
+        //у препядствия добавляется к скорости препядствия 
         if ((playerX - obstacle.x < obstacleW) &&
+        //если Х игрока - Х препядствия меньше чем ширина препядствия И
             (obstacle.x - playerX < playerW) &&
+            //Х препядсвтия - Х игрока меньше чем ширина игрока И
             (playerY - obstacle.y < obstacleW) &&
+            //У игрока - У препядствия меньше чем ширина препядствия И
             (obstacle.y - playerY < playerW)) {
-            
+                //У препядсвия - У игрока меньше чем ширина игрока 
+            lives = lives-1;
             if (lives <= 0) {
+                // если в переменной lives меньше или 0 то
                 window.location.href = "gameover.html";
+                // открыть страница gamepver.html
             }
             spawnObstacle(obstacle);
+            //выполнение функции spawnObstacle 
         }
         if (obstacle.y > 360) {
+            // если У препядствия меньше чем 360 то
             spawnObstacle(obstacle);
+            //выполнить функию spawnObstacle
         }
     });
+    
 };
-
+function fillString(character, len) {
+    return new Array(len + 1).join( character );
+}
 const updateView = () => {
     obstacles.forEach((obstacle, index) => {
         document.getElementsByClassName("obstacle")[index].style.top = obstacle.y + "px";
@@ -52,11 +68,15 @@ const updateView = () => {
     });
     document.getElementById("player").style.top = playerY + "px";
     document.getElementById("player").style.left = playerX + "px";
+<<<<<<< HEAD
     document.getElementById("lives").innerHTML = "game.heart.jpg".repeat(lives);
+=======
+    document.getElementById("lives").innerHTML = fillString(url="game.heart.jpg",lives);
+>>>>>>> d1d07365754424a16a99f96b476a905432f88c6a
 };
 
 window.setInterval(updateView, 1000 / 60);
-window.setInterval(moveObstacles, 1000 / 60);
+window.setInterval(model, 1000 / 60);
 
 class bullet {
     constructor(x,y) {
@@ -68,25 +88,29 @@ class bullet {
     }
 }
 
- 
-window.setInterval(view,  1000/FPS)
-window.setInterval(model, 1000/TPS)
-
-
 
 addEventListener("mousedown", (event) => {
     bullets.push(new bullet(playerX, playerY))
 });
 
 addEventListener("keydown", (event) => {
+    console.log(event.key)
     if (event.key === "a" || event.key === "ArrowLeft") {
+        if (playerX <=0) {
+            playerX =0;
+        } else {
+                  playerX -= 10;
+
+        }
      
-      playerX -= 10;
     } else if (event.key === "d" || event.key === "ArrowRight") {
-     
-      playerX += 10;
+        if (playerX >= 330) {
+            playerX = 330;
+        } else{
+            playerX += 10;
+        }
+      
     }
-    updatePlayerPosition();
   });
   
 
