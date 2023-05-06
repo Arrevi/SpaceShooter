@@ -52,7 +52,7 @@ const updateView = () => {
     });
     document.getElementById("player").style.top = playerY + "px";
     document.getElementById("player").style.left = playerX + "px";
-    document.getElementById("lives").innerHTML = "❤️rt ".repeat(lives);
+    document.getElementById("lives").innerHTML = "game.heart.jpg".repeat(lives);
 };
 
 window.setInterval(updateView, 1000 / 60);
