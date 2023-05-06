@@ -13,6 +13,8 @@ let playerV = -1
 let t = 0;
 let bullets = []
 let level = 1
+const heart = '<img src="img/heart.webp"></img>'
+let hearts = ""
 
 let obstacles = [
     {x: Math.random() * 330 | 0, y: -30, speed: 1},
@@ -56,7 +58,7 @@ const model = () => {
             //выполнить функию spawnObstacle
         }
     });
-    
+   
 };
 function fillString(character, len) {
     return new Array(len + 1).join( character );
@@ -66,15 +68,13 @@ const updateView = () => {
         document.getElementsByClassName("obstacle")[index].style.top = obstacle.y + "px";
         document.getElementsByClassName("obstacle")[index].style.left = obstacle.x + "px";
     });
+    
+    
     document.getElementById("player").style.top = playerY + "px";
     document.getElementById("player").style.left = playerX + "px";
-<<<<<<< HEAD
-    document.getElementById("lives").innerHTML = "game.heart.jpg".repeat(lives);
-=======
-    document.getElementById("lives").innerHTML = fillString(url="game.heart.jpg",lives);
->>>>>>> d1d07365754424a16a99f96b476a905432f88c6a
-};
-
+  
+}; 
+console.log();
 window.setInterval(updateView, 1000 / 60);
 window.setInterval(model, 1000 / 60);
 
@@ -113,4 +113,3 @@ addEventListener("keydown", (event) => {
     }
   });
   
-

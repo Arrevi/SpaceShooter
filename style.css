@@ -1,0 +1,42 @@
+#screen {
+    border: 1px solid black;
+    width: 360px;
+    height: 400px;
+    position: relative;
+    background-image: url("img/background.jpg");
+}
+#player {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    position: absolute;
+    background-image: url("img/ss.png");
+    z-index: 20;
+}
+
+.obstacle {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(163, 7, 33);
+    border-radius: 5px;
+    position: absolute;
+
+}
+.bullet {
+    width: 10px;
+    height: 15px;
+    background-color: aquamarine;
+
+}
+#lives {
+    height: 20px;
+    width: 20px;
+    background-image: url("img/heart.webp");
+}
+
+h1{
+    color: white;
+    font-family: sans-serif;
+    position: center;
+
+}
