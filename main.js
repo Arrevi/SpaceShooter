@@ -11,13 +11,15 @@ let playerW =50
 let lives = 3
 let playerV = -1
 let t = 0;
-let bullets = []
+let bullets = [];
 let level = 1
 const heart = '<img src="img/heart.webp"></img>'
 let hearts = ""
-let enemyY =60;
-let enemyX = 180;
+let enemyY0 =60;
+let enemyX0 = 180;
 let enemyW = 60;
+let enemyY;
+let enemyX;
 let obstacles = [
     {x: Math.random() * 330 | 0, y: -30, speed: 1},
     {x: Math.random() * 330 | 0, y: -30, speed: 2},
@@ -29,10 +31,16 @@ let obstacles = [
 const spawnObstacle = (obstacle) => {
     obstacle.y = -30;
     obstacle.x = Math.random() * 330 | 0;
+};let  = Math.sin(3,14);
+
+
+const moveEnemy = (enemy) => {
+    
+    enemyX = enemyX0 + enemyY0 + 10*t + Math.sin(t)
 };
 
-
 const model = () => {
+    t +=1.0/TPS
     //обьявление анонимной функции модель
     obstacles.forEach(obstacle => {
         //анонимная функция для каждого препятствия  
@@ -45,7 +53,7 @@ const model = () => {
             (playerY - obstacle.y < obstacleW) &&
             //У игрока - У препядствия меньше чем ширина препядствия И
             (obstacle.y - playerY < playerW)) {
-                //У препядсвия - У игрока меньше чем ширина игрока 
+                //У препядсвия - У игрока меньше чем ширина игрока                
             lives = lives-1;
             if (lives <= 0) {
                 // если в переменной lives меньше или 0 то
@@ -61,7 +69,18 @@ const model = () => {
             //выполнить функию spawnObstacle
         }
     });
-   
+    moveEnemy (enemy);
+    if (enemyX <=0) {
+        enemyX =0;
+    } else {
+              enemyX -= 10; 
+    }
+    if (enemyX >= 300) {
+        enemyX = 300;
+    } else{
+        enemyX += 10;
+    }
+  
 };
 function fillString(character, len) {
     return new Array(len + 1).join( character );
@@ -112,8 +131,8 @@ addEventListener("keydown", (event) => {
         }
      
     } else if (event.key === "d" || event.key === "ArrowRight") {
-        if (playerX >= 330) {
-            playerX = 330;
+        if (playerX >= 310) {
+            playerX = 310;
         } else{
             playerX += 10;
         }

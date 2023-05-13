@@ -41,8 +41,10 @@ h1{
 
 }
 
-.enemy {
+#enemy {
     width: 60px;
     height: 60px;
-    background-color: bisque;
+    background-image: url("img/spaceEnemy1.png");
+    position: absolute;
+
 }
