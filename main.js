@@ -15,7 +15,9 @@ let bullets = []
 let level = 1
 const heart = '<img src="img/heart.webp"></img>'
 let hearts = ""
-
+let enemyY =60;
+let enemyX = 180;
+let enemyW = 60;
 let obstacles = [
     {x: Math.random() * 330 | 0, y: -30, speed: 1},
     {x: Math.random() * 330 | 0, y: -30, speed: 2},
@@ -28,6 +30,7 @@ const spawnObstacle = (obstacle) => {
     obstacle.y = -30;
     obstacle.x = Math.random() * 330 | 0;
 };
+
 
 const model = () => {
     //обьявление анонимной функции модель
@@ -72,11 +75,17 @@ const updateView = () => {
     
     document.getElementById("player").style.top = playerY + "px";
     document.getElementById("player").style.left = playerX + "px";
-  
+
+    document.getElementById("enemy").style.top = enemyY + "px";
+    document.getElementById("enemy").style.left = enemyX + "px";
+ 
 }; 
 console.log();
 window.setInterval(updateView, 1000 / 60);
 window.setInterval(model, 1000 / 60);
+
+let bulletX = playerX;
+let bulletY = playerY;
 
 class bullet {
     constructor(x,y) {
@@ -87,7 +96,6 @@ class bullet {
         document.body.appendChild(this.el)
     }
 }
-
 
 addEventListener("mousedown", (event) => {
     bullets.push(new bullet(playerX, playerY))
