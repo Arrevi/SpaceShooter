@@ -25,6 +25,8 @@
 .bullet {
     width: 10px;
     height: 15px;
+    position: absolute;
+
     background-color: aquamarine;
 
 }
