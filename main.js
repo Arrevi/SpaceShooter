@@ -80,8 +80,13 @@ const model = () => {
     } else{
         enemyX += 10;
     }
+
+    if (enemy.x > 290) {
+        moveEnemy(enemy);
+    }
   
 };
+
 function fillString(character, len) {
     return new Array(len + 1).join( character );
 }
