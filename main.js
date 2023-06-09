@@ -15,11 +15,10 @@ let bullets = [];
 let level = 1
 const heart = '<img src="img/heart.webp"></img>'
 let hearts = ""
-let enemyY0 =60;
-let enemyX0 = 180;
 let enemyW = 60;
-let enemyY;
-let enemyX;
+let enemyVx = 50; 
+let enemyY = 120;
+let enemyX=70;
 let obstacles = [
     {x: Math.random() * 330 | 0, y: -30, speed: 1},
     {x: Math.random() * 330 | 0, y: -30, speed: 2},
@@ -28,19 +27,93 @@ let obstacles = [
 ];
 
 
+const bulletW = 10;
+const bulletH = 15
+
+class bullet {
+    constructor(x,y) {
+        this.hp = 1
+        this.t0 = t
+        this.x0 = x
+        this.y0 = y
+        this.vx = 0
+        this.vy = -90
+        this.x = this.x0
+        this.y = this.y0
+        this.el = document.createElement("div")
+        this.el.classList.add("bullet")
+        document.body.appendChild(this.el)
+    }
+
+    move() {
+        const dt = t - this.t0
+        this.x = this.x0 + this.vx * dt
+        this.y = this.y0 + this.vy * dt
+        if ((this.y<0) || (this.y>400)) {
+            this.hp = 0;
+        }
+    }
+
+    collide(x,y,w,h) {
+        if (
+            (x-this.x <= bulletW)  && 
+            (this.x-x <= w)  && 
+            (y-this.y <= bulletH)  && 
+            (this.y-y <= h)  
+        ) {
+            this.hp = 0;
+            return true
+        } else {
+            return false
+        }
+    }
+
+    show() {
+        if (this.hp == 0) {
+            this.el.style.visibility = 'hidden';
+        }
+        this.el.style.top = this.y + "px";
+        this.el.style.left = this.x+ "px";
+    }
+
+    hide() {
+        document.removeChild(this.el) 
+    }
+
+
+}
+
+
+
 const spawnObstacle = (obstacle) => {
     obstacle.y = -30;
     obstacle.x = Math.random() * 330 | 0;
 };let  = Math.sin(3,14);
 
 
-const moveEnemy = (enemy) => {
-    
-    enemyX = enemyX0 + enemyY0 + 10*t + Math.sin(t)
+const moveEnemy = () => {
+    enemyX = enemyX  + enemyVx/TPS
+    if (enemyX <=0) {
+        enemyVx =50;
+    } 
+    if (enemyX >= 300) {
+        enemyVx = -50;
+    } 
 };
+
 
 const model = () => {
     t +=1.0/TPS
+
+    for (let bullet of bullets) {
+        bullet.move()
+        if (bullet.collide(enemyX,enemyY, enemyW, enemyW)) {
+            bullet.hide()
+            console.log("hit")
+        }
+    }
+
+    
     //обьявление анонимной функции модель
     obstacles.forEach(obstacle => {
         //анонимная функция для каждого препятствия  
@@ -68,13 +141,20 @@ const model = () => {
             spawnObstacle(obstacle);
             //выполнить функию spawnObstacle
         }
+
+
+
     });
-    moveEnemy (enemy);
-    if (enemyX <=0) {
-        enemyX =0;
-    } else {
-              enemyX -= 10; 
+    
+    moveEnemy ();
+    function checkHP(bullet) {
+        if (bullet.hp > 0) {
+            return true
+        } else {
+            return false
+        }
     }
+<<<<<<< HEAD
     if (enemyX >= 300) {
         enemyX = 300;
     } else{
@@ -90,12 +170,23 @@ const model = () => {
 function fillString(character, len) {
     return new Array(len + 1).join( character );
 }
+=======
+
+    // clean up bullets with hp <= 0 
+    bullets = bullets.filter( (b)=>b.hp>0 )
+    bullets = bullets.filter( checkHP )
+};
+
+>>>>>>> 157bc79ec332297af7eb1cfe48e5dedbca22845b
 const updateView = () => {
     obstacles.forEach((obstacle, index) => {
         document.getElementsByClassName("obstacle")[index].style.top = obstacle.y + "px";
         document.getElementsByClassName("obstacle")[index].style.left = obstacle.x + "px";
     });
-    
+
+    for (let bullet of bullets) {
+        bullet.show()        
+    }
     
     document.getElementById("player").style.top = playerY + "px";
     document.getElementById("player").style.left = playerX + "px";
@@ -108,22 +199,8 @@ console.log();
 window.setInterval(updateView, 1000 / 60);
 window.setInterval(model, 1000 / 60);
 
-let bulletX = playerX;
-let bulletY = playerY;
 
-class bullet {
-    constructor(x,y) {
-        this.x = x
-        this.y = y
-        this.el = document.createElement("div")
-        this.el.classList.add("bullet")
-        document.body.appendChild(this.el)
-    }
-}
 
-addEventListener("mousedown", (event) => {
-    bullets.push(new bullet(playerX, playerY))
-});
 
 addEventListener("keydown", (event) => {
     console.log(event.key)
@@ -145,3 +222,6 @@ addEventListener("keydown", (event) => {
     }
   });
   
+addEventListener("mousedown", (event) => {
+    bullets.push(new bullet(playerX, playerY))
+});
