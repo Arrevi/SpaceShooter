@@ -19,6 +19,7 @@ let enemyW = 60;
 let enemyVx = 50; 
 let enemyY = 120;
 let enemyX=70;
+let enemyLives = 1;
 let obstacles = [
     {x: Math.random() * 330 | 0, y: -30, speed: 1},
     {x: Math.random() * 330 | 0, y: -30, speed: 2},
@@ -105,6 +106,11 @@ const moveEnemy = () => {
 const model = () => {
     t +=1.0/TPS
 
+
+    
+    
+       
+     
     for (let bullet of bullets) {
         bullet.move()
         if (bullet.collide(enemyX,enemyY, enemyW, enemyW)) {
@@ -112,7 +118,7 @@ const model = () => {
             console.log("hit")
         }
     }
-
+     
     
     //обьявление анонимной функции модель
     obstacles.forEach(obstacle => {
@@ -141,9 +147,8 @@ const model = () => {
             spawnObstacle(obstacle);
             //выполнить функию spawnObstacle
         }
-
-
-
+    
+   
     });
     
     moveEnemy ();
@@ -154,30 +159,12 @@ const model = () => {
             return false
         }
     }
-<<<<<<< HEAD
-    if (enemyX >= 300) {
-        enemyX = 300;
-    } else{
-        enemyX += 10;
-    }
-
-    if (enemy.x > 290) {
-        moveEnemy(enemy);
-    }
-  
-};
-
-function fillString(character, len) {
-    return new Array(len + 1).join( character );
-}
-=======
 
     // clean up bullets with hp <= 0 
     bullets = bullets.filter( (b)=>b.hp>0 )
     bullets = bullets.filter( checkHP )
 };
 
->>>>>>> 157bc79ec332297af7eb1cfe48e5dedbca22845b
 const updateView = () => {
     obstacles.forEach((obstacle, index) => {
         document.getElementsByClassName("obstacle")[index].style.top = obstacle.y + "px";
@@ -224,4 +211,19 @@ addEventListener("keydown", (event) => {
   
 addEventListener("mousedown", (event) => {
     bullets.push(new bullet(playerX, playerY))
+});
+
+const startButton = document.getElementById("start-button");
+const settingsButton = document.getElementById("settings-button");
+const helpButton = document.getElementById("help-button");
+
+startButton.addEventListener("click", () => { window.location.href = "index.html"
+});
+
+settingsButton.addEventListener("click", () => {
+
+});
+
+helpButton.addEventListener("click", () => {
+ 
 });
